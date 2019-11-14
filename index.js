@@ -1,4 +1,4 @@
-import Vue from './src/platforms/web/entry-runtime-with-compiler'
+import Vue from './src/platforms/web/entry-runtime'
 
 var vm = new Vue({
   el: '#app',
