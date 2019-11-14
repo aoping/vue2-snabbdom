@@ -13,7 +13,7 @@ export function observe(data) {
       configurable: true,
       get() {
         if (Dep.target) {
-          dep.addSub(Dep.target)
+          dep.depend()
         }
         return val
       },

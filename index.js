@@ -9,8 +9,13 @@ var vm = new Vue({
       num: 1
     }
   },
+  computed: {
+    computedNum() {
+      return this.num * 10
+    }
+  },
   render(h) {
-    return h('button', {on: {click: this.someFn}}, this.num);
+    return h('button', {on: {click: this.someFn}}, this.computedNum);
   },
   methods: {
     someFn() {

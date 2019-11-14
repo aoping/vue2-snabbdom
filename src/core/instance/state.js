@@ -1,5 +1,7 @@
 import { noop, } from '../util/index'
 import { observe } from '../observer'
+import Watcher from '../observer/watcher'
+import Dep from '../observer/dep'
 
 
 const sharedPropertyDefinition = {
@@ -8,6 +10,9 @@ const sharedPropertyDefinition = {
   get: noop,
   set: noop
 }
+
+const computedWatcherOptions = { lazy: true }
+
 
 export function proxy (target, sourceKey, key) {
   sharedPropertyDefinition.get = function proxyGetter () {
@@ -30,7 +35,7 @@ export function initState (vm) {
   } else {
     observe(vm._data = {}, true /* asRootData */)
   }
-  // if (opts.computed) initComputed(vm, opts.computed)
+  if (opts.computed) initComputed(vm, opts.computed)
   // if (opts.watch && opts.watch !== nativeWatch) {
   //   initWatch(vm, opts.watch)
   // }
@@ -61,3 +66,42 @@ function initMethods(vm, methods) {
   }
 }
 
+function initComputed(vm, computed) {
+  vm._computedWatchers = Object.create(null) // 用于保存计算watcher
+
+  for (const key in computed) {
+    const userDef = computed[key]
+    const getter = typeof userDef === 'function' ? userDef : userDef.get
+    vm._computedWatchers[key] = new Watcher(vm, getter, computedWatcherOptions)
+
+    defineComputed(vm, key, userDef)
+  }
+}
+
+function defineComputed(target, key, userDef) {
+  Object.defineProperty(target, key, {
+    enumerable: true,
+    configurable: true,
+    get() {
+      debugger
+
+      const watcher = this._computedWatchers && this._computedWatchers[key]
+      if (watcher) {
+        if (watcher.dirty) {
+          watcher.evaluate()
+        }
+        if (Dep.target) {
+          watcher.depend()
+        }
+        return watcher.value
+      }
+    },
+    set: noop,
+  })
+}
+
+function createComputedGetter (key) {
+  return function computedGetter () {
+    
+  }
+}
