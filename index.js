@@ -10,11 +10,15 @@ var vm = new Vue({
     }
   },
   render(h) {
-    return h('button', {on: {click: this.someFn}}, this.deep.num);
+    return h('button', {on: {click: this.someFn}}, this.num);
   },
   methods: {
     someFn() {
-      this.deep.num++
+      this.num++
     }
   }
 })
+
+// setTimeout(() => {
+//   vm.deep.num++
+// }, 3000)

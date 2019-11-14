@@ -12,7 +12,6 @@ export function mountComponent (vm, el) {
       patch(document.querySelector(el), vnode)
     }
     vm._vnode = vnode
-
   }
 
   new Watcher(vm, updateComponent)

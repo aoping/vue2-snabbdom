@@ -12,7 +12,6 @@ export function observe(data) {
       enumerable: true,
       configurable: true,
       get() {
-        console.log('gggg')
         if (Dep.target) {
           dep.addSub(Dep.target)
         }
@@ -20,7 +19,6 @@ export function observe(data) {
       },
       set(newVal) {
         if (val === newVal) return;
-        console.log('sss')
         val = newVal
         dep.notify(); // 通知所有订阅者
       },
