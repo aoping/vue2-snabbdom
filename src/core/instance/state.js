@@ -1,6 +1,6 @@
-import {
-  noop,
-} from '../util/index'
+import { noop, } from '../util/index'
+import { observe } from '../observer'
+
 
 const sharedPropertyDefinition = {
   enumerable: true,
@@ -36,7 +36,12 @@ export function initState (vm) {
   // }
 }
 
-
+/**
+ * 1. 把data代理到_data
+ * 2. 给data设置getter setter
+ *
+ * @param {*} vm
+ */
 function initData(vm) {
   let data = vm._data = vm.$options.data
   const keys = Object.keys(data)
@@ -45,6 +50,8 @@ function initData(vm) {
     const key = keys[i]
     proxy(vm, `_data`, key)
   }
+
+  observe(data, true /* asRootData */)
 }
 
 

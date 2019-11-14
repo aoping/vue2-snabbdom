@@ -4,13 +4,17 @@ var vm = new Vue({
   el: '#app',
   data: {
     title: 'prev',
+    num: 1,
+    deep: {
+      num: 1
+    }
   },
   render(h) {
-    return h('button', {on: {click: this.someFn}}, this.title);
+    return h('button', {on: {click: this.someFn}}, this.deep.num);
   },
   methods: {
     someFn() {
-      console.log("got clicked");
+      this.deep.num++
     }
   }
 })

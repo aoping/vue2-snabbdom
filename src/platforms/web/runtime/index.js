@@ -1,13 +1,11 @@
-import { h } from 'snabbdom'
 import Vue from 'core/index'
-import { patch } from './patch'
+import { mountComponent } from 'core/instance/lifecycle'
 
 // install platform patch function
 // Vue.prototype.__patch__ = patch
 // public mount method
 Vue.prototype.$mount = function (el) {
-  const vnode = this.$options.render.call(this, h)
-  return patch(document.querySelector(el), vnode)
+  return mountComponent(this, el)
 }
 
 export default Vue
