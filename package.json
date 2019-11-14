@@ -14,5 +14,11 @@
     "@babel/core": "7.2.0",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": []
+  "keywords": [],
+  "alias": {
+    "compiler": "./src/compiler",
+    "core": "./src/core",
+    "web": "./src/platforms/web",
+    "shared": "./src/shared"
+  }
 }
