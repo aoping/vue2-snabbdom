@@ -24,7 +24,7 @@ export function initState (vm) {
   vm._watchers = []
   const opts = vm.$options
   // if (opts.props) initProps(vm, opts.props)
-  // if (opts.methods) initMethods(vm, opts.methods)
+  if (opts.methods) initMethods(vm, opts.methods)
   if (opts.data) {
     initData(vm)
   } else {
@@ -47,4 +47,10 @@ function initData(vm) {
   }
 }
 
+
+function initMethods(vm, methods) {
+  for (const key in methods) {
+    vm[key] = typeof methods[key] !== 'function' ? noop : methods[key].bind(vm)
+  }
+}
 

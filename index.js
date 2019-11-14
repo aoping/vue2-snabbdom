@@ -6,7 +6,7 @@ var vm = new Vue({
     title: 'prev',
   },
   render(h) {
-    return h('button', {on: {click: this.$options.methods.someFn}}, this.title);
+    return h('button', {on: {click: this.someFn}}, this.title);
   },
   methods: {
     someFn() {
