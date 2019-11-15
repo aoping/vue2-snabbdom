@@ -14,5 +14,5 @@ export function mountComponent (vm, el) {
     vm._vnode = vnode
   }
 
-  new Watcher(vm, updateComponent)
+  new Watcher(vm, updateComponent, noop)
 }

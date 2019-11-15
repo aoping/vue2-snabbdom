@@ -3,19 +3,16 @@ import Vue from './src/platforms/web/entry-runtime'
 var vm = new Vue({
   el: '#app',
   data: {
-    title: 'prev',
     num: 1,
-    deep: {
-      num: 1
-    }
+    watchMsg: 'init msg'
   },
-  computed: {
-    computedNum() {
-      return this.num * 10
-    }
+  watch: {
+    num(newVal, oldVal) {
+      this.watchMsg = newVal + ' apples'
+    },
   },
   render(h) {
-    return h('button', {on: {click: this.someFn}}, this.computedNum);
+    return h('button', {on: {click: this.someFn}}, this.watchMsg);
   },
   methods: {
     someFn() {
