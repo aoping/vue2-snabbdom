@@ -46,7 +46,11 @@ export function initState (vm) {
  * @param {*} vm
  */
 function initData(vm) {
-  let data = vm._data = vm.$options.data
+  debugger
+  let data = vm.$options.data
+  data = vm._data = typeof data === 'function'
+    ? data.call(vm, vm)
+    : data || {}
   const keys = Object.keys(data)
   let i = keys.length
   while (i--) {

@@ -1,24 +1,32 @@
 import Vue from './src/platforms/web/entry-runtime'
 
-var vm = new Vue({
-  el: '#app',
-  data: {
-    num: 1,
-    watchMsg: 'init msg'
-  },
-  watch: {
-    num(newVal, oldVal) {
-      this.watchMsg = newVal + ' apples'
-    },
+Vue.component('button-counter', {
+  data: function () {
+    return {
+      num: 0
+    }
   },
   render(h) {
-    return h('button', {on: {click: this.someFn}}, this.watchMsg);
+    return h('button', {on: {click: this.someFn}}, this.num);
   },
   methods: {
     someFn() {
       this.num++
     }
   }
+})
+
+var vm = new Vue({
+  el: '#app',
+  data: {
+    msg: 'hello'
+  },
+  render(h) {
+    return h('div', {}, [
+      this._c('button-counter'),
+      h('span', {}, this.msg)
+    ]);
+  },
 })
 
 // setTimeout(() => {

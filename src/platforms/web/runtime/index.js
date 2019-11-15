@@ -5,6 +5,7 @@ import { mountComponent } from 'core/instance/lifecycle'
 // Vue.prototype.__patch__ = patch
 // public mount method
 Vue.prototype.$mount = function (el) {
+
   return mountComponent(this, el)
 }
 
