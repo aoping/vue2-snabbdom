@@ -81,8 +81,6 @@ function defineComputed(target, key, userDef) {
     enumerable: true,
     configurable: true,
     get() {
-      debugger
-
       const watcher = this._computedWatchers && this._computedWatchers[key]
       if (watcher) {
         if (watcher.dirty) {
@@ -99,7 +97,6 @@ function defineComputed(target, key, userDef) {
 }
 
 function initWatch(vm, watch) {
-  debugger
   for (const key in watch) {
     const handler = watch[key]
     if (Array.isArray(handler)) {
