@@ -46,7 +46,6 @@ export function initState (vm) {
  * @param {*} vm
  */
 function initData(vm) {
-  debugger
   let data = vm.$options.data
   data = vm._data = typeof data === 'function'
     ? data.call(vm, vm)

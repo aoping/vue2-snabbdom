@@ -1,4 +1,4 @@
-import Vue from './src/platforms/web/entry-runtime'
+import Vue, { compiler } from './src/platforms/web/entry-runtime-with-compiler'
 
 Vue.component('button-counter', {
   data: function () {
@@ -7,7 +7,9 @@ Vue.component('button-counter', {
     }
   },
   render(h) {
-    return h('button', {on: {click: this.someFn}}, this.num);
+    var button = <button onClick={this.someFn}>{this.num}</button>
+    return button
+    // return h('button', {on: {click: this.someFn}}, this.num);
   },
   methods: {
     someFn() {
