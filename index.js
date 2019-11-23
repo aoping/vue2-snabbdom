@@ -24,10 +24,16 @@ var vm = new Vue({
     msg: 'hello'
   },
   render(h) {
-    return h('div', {}, [
-      this._c('button-counter'),
-      h('span', {}, this.msg)
-    ]);
+    return (
+      <div>
+        {this._c('button-counter')}
+        <span>{this.msg}</span>
+      </div>
+    )
+    // return h('div', {}, [
+    //   this._c('button-counter'),
+    //   h('span', {}, this.msg)
+    // ]);
   },
 })
 
